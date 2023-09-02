@@ -1,0 +1,25 @@
+{
+  "name": "ecombest-pixels",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p tsconfig.json",
+    "start": "node index.js",
+    "dev": "tsc -p tsconfig.json && nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^8.3.0",
+    "fastify": "^4.20.0",
+    "mongoose": "^7.5.0",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.8",
+    "nodemon": "^3.0.1"
+  }
+}
