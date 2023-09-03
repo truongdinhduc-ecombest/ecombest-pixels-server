@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import Pixel from "../models/pixel/pixel.model";
+import Pixel from "../models/Pixel";
 import { response } from "../utils/response.util";
 
 export async function createOne(request: FastifyRequest, reply: FastifyReply) {
@@ -10,6 +10,7 @@ export async function createOne(request: FastifyRequest, reply: FastifyReply) {
 }
 
 export async function getMany(request: FastifyRequest, reply: FastifyReply) {
-  const pixels = await Pixel.find();
+  const queryParams = request.query as any;
+  const pixels = await Pixel.find(queryParams);
   response(reply, 200, pixels);
 }
