@@ -5,7 +5,9 @@ import { config } from "dotenv";
 
 config();
 const server = fastify();
-connectToMongoDB(process.env.MONGODB_URL ?? "");
+connectToMongoDB(
+  "mongodb+srv://truongdinhduc:truongdinhduc@cluster0.m0la3ey.mongodb.net/ecombest-pixels"
+);
 routes(server);
 
 server.listen({ port: 8080 }, (error, address) => {
