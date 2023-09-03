@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import PixelSpace from "../models/pixelSpace/pixelSpace.model";
+import PixelSpace from "../models/space/pixelSpace.model";
 import { response } from "../utils/response.util";
 
 export async function getOne(request: FastifyRequest, reply: FastifyReply) {
