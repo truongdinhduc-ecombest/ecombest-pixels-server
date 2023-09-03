@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import Pixel from "../models/Pixel";
+import Pixel from "../models/pixel/pixel.model";
 import { response } from "../utils/response.util";
 
 export async function createOne(request: FastifyRequest, reply: FastifyReply) {
