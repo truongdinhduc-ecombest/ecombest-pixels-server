@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createOne = exports.getOne = void 0;
-const pixelSpace_model_1 = __importDefault(require("../models/space/pixelSpace.model"));
+const pixelSpace_model_1 = __importDefault(require("../models/pixelSpace/pixelSpace.model"));
 const response_util_1 = require("../utils/response.util");
 async function getOne(request, reply) {
     const { id } = request.params;
