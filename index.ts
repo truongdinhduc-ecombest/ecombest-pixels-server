@@ -8,10 +8,16 @@ const server = fastify();
 connectToMongoDB(process.env.MONGODB_URL ?? "");
 routes(server);
 
-server.listen({ port: Number(process.env.PORT) ?? 80 }, (error, address) => {
-  if (error) {
-    console.error(error);
-    process.exit(1);
+server.listen(
+  {
+    host: process.env.HOST ?? "0.0.0.0",
+    port: Number(process.env.PORT) ?? 3000,
+  },
+  (error, address) => {
+    if (error) {
+      console.error(error);
+      process.exit(1);
+    }
+    console.log(`Server listening at ${address}`);
   }
-  console.log(`Server listening at ${address}`);
-});
+);
