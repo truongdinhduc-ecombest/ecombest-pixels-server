@@ -5,12 +5,10 @@ import { config } from "dotenv";
 
 config();
 const server = fastify();
-connectToMongoDB(
-  "mongodb+srv://truongdinhduc:truongdinhduc@cluster0.m0la3ey.mongodb.net/ecombest-pixels"
-);
+connectToMongoDB(process.env.MONGODB_URL ?? "");
 routes(server);
 
-server.listen({ port: 8080 }, (error, address) => {
+server.listen({ port: Number(process.env.PORT) ?? 80 }, (error, address) => {
   if (error) {
     console.error(error);
     process.exit(1);
