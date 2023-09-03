@@ -9,13 +9,13 @@ const response_util_1 = require("../utils/response.util");
 async function getOne(request, reply) {
     const { id } = request.params;
     const pixelSpace = await pixelSpace_model_1.default.findById(id);
-    (0, response_util_1.response)(reply, { statusCode: 200, data: pixelSpace });
+    (0, response_util_1.response)(reply, 200, { data: pixelSpace });
 }
 exports.getOne = getOne;
 async function createOne(request, reply) {
     const payload = request.body;
     const newPixelSpace = new pixelSpace_model_1.default(payload);
     await newPixelSpace.save();
-    (0, response_util_1.response)(reply, { statusCode: 201, data: newPixelSpace });
+    (0, response_util_1.response)(reply, 201, { data: newPixelSpace });
 }
 exports.createOne = createOne;
