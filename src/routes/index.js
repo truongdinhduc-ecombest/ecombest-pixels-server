@@ -14,5 +14,6 @@ function default_1(server) {
     server.route(pixel_route_1.getManyPixels);
     server.route(pixelSpace_route_1.createOnePixelSpace);
     server.route(pixelSpace_route_1.getOnePixelSpace);
+    server.route(pixelSpace_route_1.getManyPixelSpaces);
 }
 exports.default = default_1;

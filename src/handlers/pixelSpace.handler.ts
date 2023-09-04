@@ -25,3 +25,16 @@ export async function createOne(request: FastifyRequest, reply: FastifyReply) {
   await newPixelSpace.save();
   response(reply, 201, { data: newPixelSpace });
 }
+
+export async function getMany(request: FastifyRequest, reply: FastifyReply) {
+  try {
+    const queryParams = request.query as any;
+    const pixelSpaces = await PixelSpace.find(queryParams);
+    response(reply, 200, { data: pixelSpaces });
+  } catch (error: any) {
+    response(reply, error?.statusCode, {
+      message: error?.message,
+      error: error?.error,
+    });
+  }
+}

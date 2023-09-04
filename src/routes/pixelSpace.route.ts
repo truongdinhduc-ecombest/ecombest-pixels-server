@@ -1,5 +1,5 @@
 import { RouteOptions } from "fastify";
-import { createOne, getOne } from "../handlers/pixelSpace.handler";
+import { createOne, getMany, getOne } from "../handlers/pixelSpace.handler";
 
 export const getOnePixelSpace: RouteOptions = {
   url: "/pixel-space/:id",
@@ -16,4 +16,10 @@ export const createOnePixelSpace: RouteOptions = {
     },
   },
   handler: createOne,
+};
+
+export const getManyPixelSpaces: RouteOptions = {
+  url: "/pixel-space/get-many",
+  method: "get",
+  handler: getMany,
 };
