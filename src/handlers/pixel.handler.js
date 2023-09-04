@@ -13,7 +13,7 @@ async function createOne(request, reply) {
         const { pixelSpaceId, top, left } = payload;
         const existedPixel = await pixel_model_1.default.findOne({ pixelSpaceId, top, left });
         if (existedPixel) {
-            throw new error_util_1.HandlerError(302, "Pixel placed already.");
+            throw new error_util_1.HandlerError(302, "Pixel has been placed already.");
         }
         const newPixel = new pixel_model_1.default(payload);
         await newPixel.save();

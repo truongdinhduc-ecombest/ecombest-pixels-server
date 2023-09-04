@@ -9,7 +9,7 @@ export async function createOne(request: FastifyRequest, reply: FastifyReply) {
     const { pixelSpaceId, top, left } = payload;
     const existedPixel = await Pixel.findOne({ pixelSpaceId, top, left });
     if (existedPixel) {
-      throw new HandlerError(302, "Pixel placed already.");
+      throw new HandlerError(302, "Pixel has been placed already.");
     }
     const newPixel = new Pixel(payload);
     await newPixel.save();
