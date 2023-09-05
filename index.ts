@@ -1,12 +1,15 @@
 import fastify from "fastify";
-import routes from "./src/routes";
 import { connectToMongoDB } from "./src/utils/database.util";
 import { config } from "dotenv";
+import registerRoutes from "./src/routes";
+import { setUpServer } from "./src/utils/server.util";
+import { addPixelSpaceEventListeners } from "./src/socket/pixelSpace.socket";
 
 config();
-const server = fastify();
 connectToMongoDB(process.env.MONGODB_URL ?? "");
-routes(server);
+const server = fastify();
+setUpServer(server);
+registerRoutes(server);
 
 server.listen(
   {
@@ -21,3 +24,9 @@ server.listen(
     console.log(`Server listening at ${address}`);
   }
 );
+
+server.ready().then(() => {
+  server.io.on("connection", (socket) => {
+    addPixelSpaceEventListeners(socket, server.io);
+  });
+});
