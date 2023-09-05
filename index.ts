@@ -4,6 +4,7 @@ import { config } from "dotenv";
 import registerRoutes from "./src/routes";
 import { setUpServer } from "./src/utils/server.util";
 import { addPixelSpaceEventListeners } from "./src/socket/pixelSpace.socket";
+import { addPixelEventListeners } from "./src/socket/pixel.socket";
 
 config();
 connectToMongoDB(process.env.MONGODB_URL ?? "");
@@ -28,5 +29,6 @@ server.listen(
 server.ready().then(() => {
   server.io.on("connection", (socket) => {
     addPixelSpaceEventListeners(socket, server.io);
+    addPixelEventListeners(socket, server.io);
   });
 });

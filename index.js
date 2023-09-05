@@ -10,6 +10,7 @@ const dotenv_1 = require("dotenv");
 const routes_1 = __importDefault(require("./src/routes"));
 const server_util_1 = require("./src/utils/server.util");
 const pixelSpace_socket_1 = require("./src/socket/pixelSpace.socket");
+const pixel_socket_1 = require("./src/socket/pixel.socket");
 (0, dotenv_1.config)();
 (0, database_util_1.connectToMongoDB)((_a = process.env.MONGODB_URL) !== null && _a !== void 0 ? _a : "");
 const server = (0, fastify_1.default)();
@@ -28,5 +29,6 @@ server.listen({
 server.ready().then(() => {
     server.io.on("connection", (socket) => {
         (0, pixelSpace_socket_1.addPixelSpaceEventListeners)(socket, server.io);
+        (0, pixel_socket_1.addPixelEventListeners)(socket, server.io);
     });
 });
