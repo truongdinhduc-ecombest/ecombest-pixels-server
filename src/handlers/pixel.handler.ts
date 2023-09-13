@@ -6,14 +6,17 @@ import { HandlerError } from "../utils/error.util";
 export async function createOne(request: FastifyRequest, reply: FastifyReply) {
   try {
     const payload = request.body as any;
-    const { pixelSpaceId, top, left } = payload;
+    const { pixelSpaceId, top, left, color } = payload;
     const existedPixel = await Pixel.findOne({ pixelSpaceId, top, left });
     if (existedPixel) {
-      throw new HandlerError(302, "Pixel has been placed already.");
+      existedPixel.color = color;
+      await existedPixel.save();
+      response(reply, 201, { data: existedPixel });
+    } else {
+      const newPixel = new Pixel(payload);
+      await newPixel.save();
+      response(reply, 201, { data: newPixel });
     }
-    const newPixel = new Pixel(payload);
-    await newPixel.save();
-    response(reply, 201, { data: newPixel });
   } catch (error: any) {
     response(reply, error?.statusCode, {
       message: error?.message,

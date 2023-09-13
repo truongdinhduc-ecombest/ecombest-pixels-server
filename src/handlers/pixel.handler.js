@@ -6,18 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMany = exports.createOne = void 0;
 const pixel_model_1 = __importDefault(require("../models/pixel/pixel.model"));
 const response_util_1 = require("../utils/response.util");
-const error_util_1 = require("../utils/error.util");
 async function createOne(request, reply) {
     try {
         const payload = request.body;
-        const { pixelSpaceId, top, left } = payload;
+        const { pixelSpaceId, top, left, color } = payload;
         const existedPixel = await pixel_model_1.default.findOne({ pixelSpaceId, top, left });
         if (existedPixel) {
-            throw new error_util_1.HandlerError(302, "Pixel has been placed already.");
+            existedPixel.color = color;
+            await existedPixel.save();
+            (0, response_util_1.response)(reply, 201, { data: existedPixel });
         }
-        const newPixel = new pixel_model_1.default(payload);
-        await newPixel.save();
-        (0, response_util_1.response)(reply, 201, { data: newPixel });
+        else {
+            const newPixel = new pixel_model_1.default(payload);
+            await newPixel.save();
+            (0, response_util_1.response)(reply, 201, { data: newPixel });
+        }
     }
     catch (error) {
         (0, response_util_1.response)(reply, error === null || error === void 0 ? void 0 : error.statusCode, {
